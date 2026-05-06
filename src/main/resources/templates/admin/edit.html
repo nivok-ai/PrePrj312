@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Форма изменения пользователя</title>
+</head>
+<body>
+<form th:method="PATCH" th:action="@{/admin/edit(id=${user.getId()})}" th:object="${user}">
+    <label for="name">Введите новое имя: </label>
+    <input type="text" th:field="*{username}" id="name"/>
+    <br/><br/>
+    <label for="name">Введите новый возраст: </label>
+    <input type="text" th:field="*{age}" id="age"/>
+    <br/><br/>
+
+    <label for="name">Введите новый пароль: </label>
+    <input type="text" th:field="*{password}" id="password"/>
+    <br/><br/>
+
+    <label for="name">Выберите роли: </label>
+    <div>
+        <input type="checkbox" name="roleIds" value="1"
+               th:checked="${user.hasRole('ROLE_USER')}"/>
+        <label>ROLE_USER</label>
+    </div>
+    <div>
+        <input type="checkbox" name="roleIds" value="2"
+               th:checked="${user.hasRole('ROLE_ADMIN')}"/>
+        <label>ROLE_ADMIN</label>
+    </div>
+    <input type="submit" value="UPDATE!"/>
+</form>
+<div>
+    <th:block th:each="msg : ${messages}">
+        <h1 th:text="${msg}"></h1>
+    </th:block>
+</div>
+<br>
+<a href="/logout">LOG OUT</a>
+</body>
+</html>

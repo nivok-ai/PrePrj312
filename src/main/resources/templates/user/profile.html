@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Домашняя страница</title>
+    <style>
+        .profile-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 5px;
+            max-width: 500px;
+        }
+        .info-row {
+            margin: 10px 0;
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        .label {
+            font-weight: bold;
+            display: inline-block;
+            width: 100px;
+        }
+        .role-badge {
+            display: inline-block;
+            background-color: #007bff;
+            color: white;
+            padding: 3px 8px;
+            margin: 2px;
+            border-radius: 3px;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="profile-card">
+    <h2>Welcome, <span th:text="${user.username}">User</span>!</h2>
+
+    <div class="info-row">
+        <span class="label">Username:</span>
+        <span th:text="${user.username}"></span>
+    </div>
+
+    <div class="info-row">
+        <span class="label">Password:</span>
+        <span th:text="${user.password}"></span>
+    </div>
+
+    <div class="info-row">
+        <span class="label">Age:</span>
+        <span th:text="${user.age}">0</span>
+    </div>
+
+    <div class="info-row">
+        <span class="label">Roles:</span>
+        <span th:each="role : ${user.roles}">
+                <span class="role-badge" th:text="${role.title}"></span>
+            </span>
+    </div>
+
+<!--    <div class="info-row">
+        <span class="label">Account Status:</span>
+        <span th:if="${user.enabled}">Active</span>
+        <span th:unless="${user.enabled}">Disabled</span>
+    </div>-->
+</div>
+<div th:each="role : ${user.roles}" th:if="${role.title == 'ROLE_ADMIN'}" th:remove="tag">
+    <a href="/admin/users">Перейти на страницу админа</a>
+</div>
+<div>
+    <br/>
+    <a href="/logout">LOG OUT</a>
+</div>
+</body>
+</html>
