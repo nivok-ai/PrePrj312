@@ -29,7 +29,6 @@ public class Role implements GrantedAuthority {
     private List<User> users;
 
 
-
     public Long getId() {
         return id;
     }

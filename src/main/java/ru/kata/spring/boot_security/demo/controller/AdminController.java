@@ -24,25 +24,13 @@ public class AdminController {
     private RoleRepository roleRepository;
 
     private PasswordEncoder passwordEncoder;
-   @Autowired
-       public AdminController(UserService userService, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+
+    @Autowired
+    public AdminController(UserService userService, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;
     }
-
-
-
-
-/*    @GetMapping("/authenticated")
-    public String pageOfAuthdUsers(Principal principal) {
-        return "web service logged"+principal.getName();
-    }*/
-/*
-    @GetMapping("/user1")
-    public String user1(Principal principal) {
-        return "web service user"+principal.getName();
-    }*/
 
     @GetMapping("/new")
     public String newUser(Model model) {
