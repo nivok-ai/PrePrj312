@@ -3,7 +3,6 @@ package ru.kata.spring.boot_security.demo.model;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
@@ -13,7 +12,6 @@ import java.util.List;
 
 @Getter @Setter
 @ToString(onlyExplicitlyIncluded = true)
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "roles")
 public class Role implements GrantedAuthority {

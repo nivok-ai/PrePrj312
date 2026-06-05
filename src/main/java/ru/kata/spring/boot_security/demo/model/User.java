@@ -21,7 +21,6 @@ import java.util.stream.Collectors;
 
 @Getter @Setter
 @ToString(onlyExplicitlyIncluded = true)
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "username"))
 public class User implements UserDetails {
@@ -40,7 +39,9 @@ public class User implements UserDetails {
     private String password;
 
     @Size(min = 1, message = "У пользователя должна быть минимум одна роль")
-    @ManyToMany
+    @ToString.Exclude      // Не включать в toString
+    @EqualsAndHashCode.Exclude
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id",nullable = false), inverseJoinColumns = @JoinColumn(name = "role_id"))
    // @Size(min = 1, message = "У пользователя должна быть минимум одна роль")
     private Set<Role> roles = new HashSet<>();
