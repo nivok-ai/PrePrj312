@@ -6,6 +6,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -26,8 +27,10 @@ public class User implements UserDetails {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @Size(min = 1, message = "У пользователя должна быть минимум одна роль")
     @ManyToMany
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "user_id",nullable = false), inverseJoinColumns = @JoinColumn(name = "role_id"))
+   // @Size(min = 1, message = "У пользователя должна быть минимум одна роль")
     private Set<Role> roles = new HashSet<>();
 
     public Set<Role> getRoles() {
