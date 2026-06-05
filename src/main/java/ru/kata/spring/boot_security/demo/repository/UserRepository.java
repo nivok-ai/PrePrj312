@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     // Spring сам реализует методы по именам
     // JOIN FETCH для принудительной загрузки ролей
-    @Query("SELECT u FROM User u JOIN FETCH u.roles WHERE u.username = :username")
+    @Query("SELECT DISTINCT u FROM User u JOIN FETCH u.roles WHERE u.username = :username")
     Optional<User> findUserWithRolesByUsername(@Param("username") String username);
 
 
