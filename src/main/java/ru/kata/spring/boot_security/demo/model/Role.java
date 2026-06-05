@@ -8,7 +8,6 @@ import org.springframework.security.core.GrantedAuthority;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import java.util.List;
 
 @Getter @Setter
 @ToString(onlyExplicitlyIncluded = true)
@@ -22,10 +21,6 @@ public class Role implements GrantedAuthority {
 
     @Column(name = "title", nullable = false, length = 50)
     private String title;
-
-    @ManyToMany
-    @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> users;
 
     @Override
     public String getAuthority() {
