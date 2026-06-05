@@ -1,10 +1,19 @@
 package ru.kata.spring.boot_security.demo.model;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.EqualsAndHashCode;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.List;
 
+@Getter @Setter
+@ToString(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "roles")
 public class Role implements GrantedAuthority {
@@ -16,41 +25,9 @@ public class Role implements GrantedAuthority {
     @Column(name = "title", nullable = false, length = 50)
     private String title;
 
-    public Role() {
-
-    }
-
-    public Role(String title) {
-        this.title = title;
-    }
-
     @ManyToMany
     @JoinTable(name = "users_roles", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
     private List<User> users;
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    @Override
-    public String toString() {
-        return "\nRole{" +
-                "id=" + id +
-                ", title='" + title + '\'';
-    }
 
     @Override
     public String getAuthority() {
